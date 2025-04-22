@@ -1,0 +1,23 @@
+{
+  "name": "battle-1",
+  "version": "1.0.0",
+  "description": "A strategy project where a king assigns 5 platoons to attack 5 enemy platoons. Each has a specific soldier type. The goal is to find the best matchups to win at least 3 out of 5 battles. The program checks all possible assignments and picks the one that gives the highest chance of victory.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sribalajimuruganandham/battle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sribalajimuruganandham/battle/issues"
+  },
+  "homepage": "https://github.com/sribalajimuruganandham/battle#readme",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
