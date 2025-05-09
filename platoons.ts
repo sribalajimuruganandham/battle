@@ -1,18 +1,11 @@
-import { PLATOONSADVANTAGES } from "./config";
+import Commander from "./commander";
+import Troops from "./troop";
 export default class Platoon {
-  constructor(private _type: string, private _size: number) {}
-  get type(): string {
-    return this._type;
+  constructor(private _troops: Troops[], private _commader: Commander) {}
+  get troops(): Troops[] {
+    return this._troops;
   }
-
-  get size(): number {
-    return this._size;
-  }
-  // find the count of soldiers that can handle the target platoon
-  handlingSoliderCount(targetPlatoon: Platoon): number {
-    if (PLATOONSADVANTAGES[this._type].includes(targetPlatoon._type)) {
-      return this._size * 2;
-    }
-    return this._size;
+  get commader(): Commander {
+    return this._commader;
   }
 }

@@ -1,10 +1,13 @@
 import BattleStatergy from "./battle-statergy";
 class Battle {
-  startBattle(myPlatoons: string, opponentPlatoons: string): void {
+  startBattle(myPlatoons: string, opponentPlatoons: string,myCommander:string="",opponentCommander:string=""): void {
     const battleStatergy = new BattleStatergy();
     //format the platoons
-    const myTrainedPlatoons = battleStatergy.train(myPlatoons);
-    const opponentTrainedPlatoons = battleStatergy.train(opponentPlatoons);
+    myCommander = myCommander ? myCommander : "";
+    opponentCommander = opponentCommander ? opponentCommander : "";
+    console.log(myCommander,opponentCommander);
+    const myTrainedPlatoons = battleStatergy.train(myPlatoons,myCommander)
+    const opponentTrainedPlatoons = battleStatergy.train(opponentPlatoons,opponentCommander);
     let status = battleStatergy.battleStatergy(
       myTrainedPlatoons,
       opponentTrainedPlatoons
@@ -17,10 +20,10 @@ class Battle {
     }
   }
 }
-const [, , myPlatoons, opponentPlatoons] = process.argv;
+const [, , myPlatoons, opponentPlatoons,myCommander,opponentCommander] = process.argv;
 if (myPlatoons && opponentPlatoons) {
   const battle = new Battle();
-  battle.startBattle(myPlatoons, opponentPlatoons);
+  battle.startBattle(myPlatoons, opponentPlatoons,myCommander,opponentCommander);
 } else {
   console.log("Please provide the platoons");
 }
