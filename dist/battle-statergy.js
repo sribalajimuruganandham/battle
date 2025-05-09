@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const platoons_1 = require("./platoons");
 const battle_field_1 = require("./battle-field");
-class battleStatergy {
+const commander_1 = require("./commander");
+class BattleStatergy {
     battleStatergy(myTrainedPlatoons, opponentTrainedPlatoons) {
         //generate combinations of platoons
         let myTrainedPlatoonsSeq = this.generatePermutations(myTrainedPlatoons);
@@ -16,17 +17,20 @@ class battleStatergy {
         }
         return null;
     }
-    train(myPlatoons) {
+    train(myPlatoons, commaderAdvantages) {
         //format the platoons
+        let advantages = commaderAdvantages.split("#");
+        //to remove first word "commander"
+        advantages.shift();
         const platoons = myPlatoons.split(";").map((platoon) => {
-            return this.platoonsFormation(platoon);
+            return this.platoonsFormation(platoon, advantages);
         });
         return platoons;
     }
-    platoonsFormation(platoon) {
+    platoonsFormation(platoon, commaderAdvantages) {
         //create object of platoon
         const [type, size] = platoon.split("#");
-        return new platoons_1.default(type, parseInt(size));
+        return new platoons_1.default(type, parseInt(size), new commander_1.default(commaderAdvantages));
     }
     //generate all possible combinations of platoons
     generatePermutations(arr) {
@@ -46,4 +50,4 @@ class battleStatergy {
         return results;
     }
 }
-exports.default = battleStatergy;
+exports.default = BattleStatergy;

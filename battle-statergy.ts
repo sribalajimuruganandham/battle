@@ -1,6 +1,8 @@
 import Platoon from "./platoons";
 import BattleField from "./battle-field";
-export default class battleStatergy {
+import Commander from "./commander";
+import Troops from "./troop";
+export default class BattleStatergy {
   battleStatergy(
     myTrainedPlatoons: Platoon[],
     opponentTrainedPlatoons: Platoon[]
@@ -20,17 +22,26 @@ export default class battleStatergy {
     }
     return null;
   }
-  train(myPlatoons: string): Platoon[] {
+  train(myPlatoons: string,commaderAdvantages:string): Platoon[] {
     //format the platoons
+    let advantages:string[] = commaderAdvantages.split("#");
+    //to remove first word "commander"
+    advantages.shift();
     const platoons = myPlatoons.split(";").map((platoon) => {
-      return this.platoonsFormation(platoon);
+      return this.platoonsFormation(platoon,advantages);
     });
     return platoons;
   }
-  platoonsFormation(platoon: string): Platoon {
+  platoonsFormation(platoon: string,commaderAdvantages:string[]): Platoon {
     //create object of platoon
-    const [type, size] = platoon.split("#");
-    return new Platoon(type, parseInt(size));
+    let formatedTroops = platoon.split('&').map((troop)=>{
+      return this.troopsFormation(troop);
+    })
+    return new Platoon(formatedTroops,new Commander(commaderAdvantages));
+  }
+  troopsFormation(troops:string){
+    const [type, size] = troops.split("#");
+    return new Troops(type, parseInt(size)); 
   }
   //generate all possible combinations of platoons
   generatePermutations(arr: Platoon[]): Platoon[][] {
